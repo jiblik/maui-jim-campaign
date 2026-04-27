@@ -4,6 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>שת"פ Maui Jim · בריף לקריאייטורים</title>
+<meta property="og:title" content="שת״פ Maui Jim — בריף לקריאייטורים">
+<meta property="og:description" content="קצת על משקפי השמש של מאווי ג׳ים, את מי אנחנו מחפשים, ואיך זה מתבצע.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Assistant:wght@300;400;600;700&family=Italianno&display=swap" rel="stylesheet">
@@ -27,12 +30,11 @@
     font-family: 'Heebo', 'Assistant', sans-serif;
     background: var(--navy-900);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.8;
     overflow-x: hidden;
     direction: rtl;
   }
 
-  /* ===== Animated background ===== */
   .bg-glow {
     position: fixed;
     inset: 0;
@@ -46,25 +48,45 @@
   /* ===== Hero ===== */
   .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 80px 24px 40px;
+    padding: 80px 24px 60px;
   }
-  .hero-img {
+  .hero-bg {
     position: absolute;
     inset: 0;
     background:
       linear-gradient(180deg, rgba(6, 15, 31, 0.55) 0%, rgba(6, 15, 31, 0.85) 70%, var(--navy-900) 100%),
-      url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2400&q=80') center/cover;
+      linear-gradient(135deg, #0a2540 0%, #0d3a5c 40%, #1a5a82 70%, #2a7ba8 100%);
     transform: scale(1.05);
     animation: kenburns 20s ease-in-out infinite alternate;
   }
+  /* Decorative palm/sun layers */
+  .hero-bg::before {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(circle at 30% 40%, rgba(240, 200, 120, 0.35), transparent 55%);
+    filter: blur(20px);
+  }
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(180deg, transparent, rgba(6, 15, 31, 0.9));
+  }
   @keyframes kenburns {
-    from { transform: scale(1.05) translateX(0); }
-    to { transform: scale(1.15) translateX(-2%); }
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
   }
   .hero-content {
     position: relative;
@@ -96,16 +118,10 @@
   .hero h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 900;
-    margin: 16px 0 12px;
+    margin: 16px 0 20px;
     letter-spacing: -0.02em;
   }
   .hero h1 .accent { color: var(--gold-bright); }
-  .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--text-dim);
-    max-width: 640px;
-    margin: 0 auto 40px;
-  }
   .hero-cta {
     display: inline-flex;
     align-items: center;
@@ -122,6 +138,7 @@
     cursor: pointer;
     border: none;
     font-family: inherit;
+    margin-top: 12px;
   }
   .hero-cta:hover {
     transform: translateY(-3px);
@@ -142,6 +159,14 @@
     50% { transform: translateX(-50%) translateY(8px); }
   }
 
+  /* Sunglasses SVG decoration */
+  .hero-glasses {
+    margin: 30px auto 0;
+    width: clamp(120px, 18vw, 180px);
+    opacity: 0.85;
+    filter: drop-shadow(0 8px 24px rgba(212, 168, 90, 0.35));
+  }
+
   /* ===== Sections ===== */
   section {
     padding: 100px 24px;
@@ -160,129 +185,96 @@
     font-size: clamp(2rem, 4.5vw, 3rem);
     font-weight: 900;
     line-height: 1.2;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
   .section-title .accent { color: var(--gold-bright); }
   .section-intro {
     font-size: 1.1rem;
     color: var(--text-dim);
-    max-width: 720px;
+    max-width: 760px;
     margin-bottom: 50px;
   }
 
-  /* ===== About brand cards ===== */
-  .brand-grid {
+  /* ===== Brand bullet list ===== */
+  .brand-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
-  .brand-card {
+  .brand-item {
     background: linear-gradient(160deg, rgba(24, 48, 93, 0.4), rgba(10, 24, 48, 0.6));
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 28px;
+    padding: 24px 28px;
     backdrop-filter: blur(10px);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
-  .brand-card:hover {
-    transform: translateY(-6px);
+  .brand-item:hover {
+    transform: translateX(-6px);
     border-color: var(--gold);
   }
-  .brand-card .num {
+  .brand-item .num {
     font-family: 'Italianno', cursive;
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: var(--gold-bright);
-    line-height: 1;
-    margin-bottom: 8px;
+    line-height: 0.9;
+    flex-shrink: 0;
+    min-width: 60px;
   }
-  .brand-card p { color: var(--text); font-size: 0.98rem; }
+  .brand-item p { color: var(--text); font-size: 1.02rem; line-height: 1.7; }
 
-  /* ===== Lens tech (interactive tabs) ===== */
-  .tech-wrap {
-    background: linear-gradient(160deg, rgba(24, 48, 93, 0.5), rgba(10, 24, 48, 0.7));
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 40px;
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
-    align-items: stretch;
+  /* ===== Lens summary box ===== */
+  .lens-summary {
+    margin-top: 40px;
+    background: linear-gradient(135deg, rgba(212, 168, 90, 0.12), rgba(212, 168, 90, 0.04));
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 32px 36px;
   }
-  .tech-tabs {
+  .lens-summary .headline {
+    font-size: 1.25rem;
+    color: var(--gold-bright);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .lens-summary .body { color: var(--text); font-size: 1.05rem; }
+
+  .lens-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .lens-pill {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-  }
-  .tech-tab {
-    background: transparent;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    padding: 20px 12px;
+    background: rgba(6, 15, 31, 0.4);
     border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 16px 20px;
-    color: var(--text);
-    text-align: right;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: all 0.3s ease;
+    border-radius: 14px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
   }
-  .tech-tab:hover { border-color: var(--gold); }
-  .tech-tab.active {
-    background: linear-gradient(135deg, rgba(212, 168, 90, 0.15), transparent);
+  .lens-pill:hover {
+    transform: translateY(-4px);
     border-color: var(--gold);
+  }
+  .lens-pill .icon {
+    width: 44px;
+    height: 44px;
     color: var(--gold-bright);
   }
-  .tech-tab .icon {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(212, 168, 90, 0.1);
-    border-radius: 10px;
-    color: var(--gold-bright);
-    flex-shrink: 0;
-  }
-  .tech-content {
-    position: relative;
-    min-height: 280px;
-  }
-  .tech-panel {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    pointer-events: none;
-  }
-  .tech-panel.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .tech-panel h3 {
-    font-size: 1.8rem;
-    color: var(--gold-bright);
-    margin-bottom: 16px;
-    font-weight: 700;
-  }
-  .tech-panel p {
-    font-size: 1.05rem;
+  .lens-pill span {
+    font-weight: 600;
     color: var(--text);
-    margin-bottom: 16px;
-  }
-  .tech-panel .feel {
-    margin-top: 24px;
-    padding: 16px 20px;
-    background: rgba(212, 168, 90, 0.08);
-    border-right: 3px solid var(--gold);
-    border-radius: 8px;
-    color: var(--cream);
-    font-style: italic;
+    font-size: 0.98rem;
   }
 
   /* ===== Audience ===== */
@@ -292,7 +284,7 @@
     border-radius: 24px;
     padding: 40px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 40px;
     align-items: center;
   }
@@ -300,14 +292,16 @@
     font-size: 1.5rem;
     color: var(--gold-bright);
     margin-bottom: 16px;
+    margin-top: 24px;
   }
-  .audience-list { list-style: none; margin-top: 20px; }
+  .audience-list { list-style: none; margin-top: 12px; }
   .audience-list li {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 14px;
     font-size: 1.02rem;
+    line-height: 1.6;
   }
   .audience-list li::before {
     content: "✓";
@@ -319,27 +313,62 @@
   .audience-quote {
     background: rgba(212, 168, 90, 0.08);
     border-right: 3px solid var(--gold);
-    padding: 20px 24px;
+    padding: 18px 22px;
     border-radius: 8px;
-    margin-top: 24px;
+    margin-top: 28px;
     color: var(--cream);
     font-size: 0.98rem;
+    line-height: 1.7;
   }
-  .audience-quote .heart { color: var(--gold-bright); margin-left: 8px; }
+  .audience-quote .heart { color: var(--gold-bright); margin-left: 8px; font-size: 1.1rem; }
+
+  /* Self-contained audience visual (CSS art) */
   .audience-visual {
     position: relative;
     aspect-ratio: 4/5;
     border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(212, 168, 90, 0.2), rgba(24, 48, 93, 0.6));
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(240, 200, 120, 0.35), transparent 50%),
+      linear-gradient(135deg, #0d3a5c 0%, #1a5a82 50%, #2a7ba8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .audience-visual::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 50%;
+    background: radial-gradient(circle at 70% 30%, rgba(255, 220, 150, 0.4), transparent 60%);
+    filter: blur(20px);
   }
   .audience-visual::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, transparent 50%, rgba(6, 15, 31, 0.9) 100%),
-      url('https://images.unsplash.com/photo-1545153996-433d6885ec73?auto=format&fit=crop&w=1200&q=80') center/cover;
+    bottom: -10%;
+    left: -10%;
+    width: 120%;
+    height: 50%;
+    background: linear-gradient(180deg, transparent, rgba(6, 15, 31, 0.8));
+  }
+  .audience-visual .glasses-art {
+    position: relative;
+    z-index: 2;
+    width: 70%;
+    max-width: 280px;
+    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.5));
+  }
+  .audience-visual .horizon {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(240, 200, 120, 0.6), transparent);
+    z-index: 1;
   }
 
   /* ===== Process steps ===== */
@@ -361,12 +390,11 @@
     position: relative;
     padding: 24px 0 24px 0;
     padding-right: 110px;
-    cursor: pointer;
   }
   .step-num {
     position: absolute;
     right: 0;
-    top: 24px;
+    top: 28px;
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -393,21 +421,18 @@
     border-color: var(--gold);
     transform: translateX(-6px);
   }
-  .step-card h3 {
-    font-size: 1.3rem;
+  .step-card p {
+    color: var(--text);
+    font-size: 1.02rem;
+    line-height: 1.8;
+  }
+  .step-card .phone {
     color: var(--gold-bright);
-    margin-bottom: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--gold);
   }
-  .step-card p { color: var(--text); }
-  .step-card .meta {
-    display: inline-block;
-    margin-top: 12px;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    padding: 4px 12px;
-    background: rgba(212, 168, 90, 0.08);
-    border-radius: 999px;
-  }
+  .step-card .phone:hover { color: var(--cream); }
 
   /* ===== Features strip ===== */
   .features {
@@ -438,7 +463,7 @@
     color: var(--text);
   }
 
-  /* ===== CTA final ===== */
+  /* ===== Final CTA ===== */
   .cta-final {
     text-align: center;
     padding: 80px 24px;
@@ -449,6 +474,7 @@
     font-size: clamp(3rem, 6vw, 5rem);
     color: var(--gold-bright);
     margin-bottom: 16px;
+    line-height: 1;
   }
   .cta-final p {
     color: var(--text-dim);
@@ -502,15 +528,14 @@
 
   /* ===== Mobile ===== */
   @media (max-width: 820px) {
-    .tech-wrap { grid-template-columns: 1fr; padding: 24px; }
-    .tech-content { min-height: auto; }
-    .tech-panel { position: static; }
-    .tech-panel:not(.active) { display: none; }
-    .audience-card { grid-template-columns: 1fr; padding: 24px; }
+    .audience-card { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
     .audience-visual { aspect-ratio: 16/10; }
+    .lens-icons { grid-template-columns: repeat(2, 1fr); }
     .steps::before { right: 24px; }
     .step { padding-right: 80px; }
     .step-num { width: 56px; height: 56px; font-size: 1.4rem; top: 28px; }
+    .brand-item { padding: 20px; gap: 14px; }
+    .brand-item .num { font-size: 2.4rem; min-width: 44px; }
     section { padding: 70px 20px; }
   }
 </style>
@@ -521,19 +546,43 @@
 
 <!-- ===== HERO ===== -->
 <header class="hero">
-  <div class="hero-img"></div>
+  <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">שיתוף פעולה ממומן</div>
     <div class="hero-script">Maui Jim</div>
     <h1>שת"פ <span class="accent">מאווי ג'ים</span></h1>
-    <p class="hero-sub">
-      קמפיין דיגיטלי לסלבים ומשפיענים ספורטיביים בישראל –
-      משקפי שמש איכותיים שגולשים, רוכבים וספורטאים מובילים בעולם נשבעים בהם.
-    </p>
-    <button class="hero-cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-      גלו את הקמפיין
-      <span style="font-size:1.2rem">↓</span>
-    </button>
+    <!-- Sunglasses SVG -->
+    <svg class="hero-glasses" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lensG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1a5a82"/>
+          <stop offset="60%" stop-color="#0d3a5c"/>
+          <stop offset="100%" stop-color="#060f1f"/>
+        </linearGradient>
+        <linearGradient id="frameG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f0c878"/>
+          <stop offset="100%" stop-color="#a47e36"/>
+        </linearGradient>
+      </defs>
+      <!-- Left lens -->
+      <ellipse cx="55" cy="40" rx="38" ry="28" fill="url(#lensG)" stroke="url(#frameG)" stroke-width="3"/>
+      <!-- Right lens -->
+      <ellipse cx="145" cy="40" rx="38" ry="28" fill="url(#lensG)" stroke="url(#frameG)" stroke-width="3"/>
+      <!-- Bridge -->
+      <path d="M93 32 Q100 26 107 32" stroke="url(#frameG)" stroke-width="3" fill="none"/>
+      <!-- Arms -->
+      <path d="M17 38 L4 30" stroke="url(#frameG)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M183 38 L196 30" stroke="url(#frameG)" stroke-width="3" stroke-linecap="round"/>
+      <!-- Reflections -->
+      <ellipse cx="42" cy="30" rx="10" ry="5" fill="rgba(255,255,255,0.25)"/>
+      <ellipse cx="132" cy="30" rx="10" ry="5" fill="rgba(255,255,255,0.25)"/>
+    </svg>
+    <div>
+      <button class="hero-cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        קראו את הבריף
+        <span style="font-size:1.2rem">↓</span>
+      </button>
+    </div>
   </div>
   <div class="scroll-hint">גללו למטה</div>
 </header>
@@ -543,90 +592,59 @@
   <div class="reveal">
     <div class="section-eyebrow">על המותג</div>
     <h2 class="section-title">קצת על משקפי השמש <span class="accent">של מאווי ג'ים</span></h2>
-    <p class="section-intro">
-      Maui Jim נחשב לאחד המותגים האיכותיים ביותר בעולם משקפי השמש הספורטיביים –
-      "מותג של מביני דבר" שעדיין לא מוכר מספיק בישראל. כאן נכנסים אתם.
-    </p>
   </div>
 
-  <div class="brand-grid reveal">
-    <div class="brand-card">
+  <div class="brand-list reveal">
+    <div class="brand-item">
       <div class="num">01</div>
-      <p>מותג <strong>פרימיום עולמי</strong> בעולם משקפי השמש הספורטיביים – איכות בלתי מתפשרת.</p>
+      <p>מותג משקפי השמש של מאווי ג'ים Maui Jim נחשב לאחד המותגים האיכותיים ביותר בעולם משקפי השמש הספורטיביים.</p>
     </div>
-    <div class="brand-card">
+    <div class="brand-item">
       <div class="num">02</div>
-      <p>נחשב ל"מותג של <strong>מביני דבר</strong>" – פחות מוכר בישראל, אבל ידוע מאוד בעולם.</p>
+      <p>המותג עדיין אינו מוכר מאוד בישראל כיום והוא נחשב בעולם מותג של "מביני דבר".</p>
     </div>
-    <div class="brand-card">
+    <div class="brand-item">
       <div class="num">03</div>
-      <p>הכי פופולרי בארה"ב בקרב <strong>קהילות הגולשים וחובבי הספורט הימי</strong>.</p>
+      <p>משקפי השמש של מאווי ג'ים מוכרים כיום בעיקר בארה"ב, שם הם מוכרים ומוערכים מאוד בקרב קהילות הגולשים וחובבי הספורט הימי.</p>
     </div>
-    <div class="brand-card">
+    <div class="brand-item">
       <div class="num">04</div>
-      <p>נחשב למשקפי שמש ספורטיביים עמידים – אבל היתרון <strong>האמיתי הוא בעדשות</strong>.</p>
+      <p>משקפי מאווי ג'ים נחשבים למשקפי שמש ספורטיביים עמידים מאוד אך מעוצבים ואופנתיים, אבל עיקר היתרונות נמצא בעדשות של מאווי ג'ים:</p>
     </div>
   </div>
 
-  <!-- ===== LENS TECH INTERACTIVE ===== -->
-  <div class="reveal">
-    <div class="section-eyebrow" style="margin-top: 40px;">טכנולוגיית העדשות</div>
-    <h2 class="section-title">היתרון האמיתי – <span class="accent">בעדשות</span></h2>
-    <p class="section-intro">לחצו על כל יכולת כדי להבין למה מי שמרכיב פעם – לא חוזר אחורה.</p>
-  </div>
+  <!-- Lens summary -->
+  <div class="lens-summary reveal">
+    <div class="headline">העדשות מצטיינות ביכולת ההגנה, בסינון, בקיטוב ובהבלטת הצבעים.</div>
+    <div class="body">פשוט צריך לנסות להסתובב איתם בחוץ כמה שניות ולהרגיש את ההבדל.</div>
 
-  <div class="tech-wrap reveal">
-    <div class="tech-tabs">
-      <button class="tech-tab active" data-tab="0">
-        <span class="icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg>
-        </span>
-        הגנה
-      </button>
-      <button class="tech-tab" data-tab="1">
-        <span class="icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        </span>
-        סינון
-      </button>
-      <button class="tech-tab" data-tab="2">
-        <span class="icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5v14"/><circle cx="12" cy="12" r="9"/></svg>
-        </span>
-        קיטוב
-      </button>
-      <button class="tech-tab" data-tab="3">
-        <span class="icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/></svg>
-        </span>
-        הבלטת צבעים
-      </button>
-    </div>
-
-    <div class="tech-content">
-      <div class="tech-panel active">
-        <h3>הגנה מקסימלית מהשמש</h3>
-        <p>חסימה מלאה של קרני UVA/UVB מסוכנות, כולל הגנה מפני זוהר ים ומדבר.</p>
-        <p>העדשות בנויות משכבות מרובות שמסננות את הספקטרום שמזיק לעיניים – ולא רק "מחשיכות" כמו רוב המשקפיים.</p>
-        <div class="feel">"זה לא משקפי שמש – זו שכבת הגנה. ההבדל מורגש אחרי דקה בחוץ."</div>
+    <div class="lens-icons">
+      <div class="lens-pill">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/>
+        </svg>
+        <span>הגנה</span>
       </div>
-      <div class="tech-panel">
-        <h3>סינון אור חכם</h3>
-        <p>מסננים את אורכי הגל המעייפים את העין – ומשאירים רק את האור שמועיל לראייה.</p>
-        <p>התוצאה: שעות ארוכות בחוץ בלי כאב ראש, בלי דמעות, בלי עיניים אדומות.</p>
-        <div class="feel">"אחרי יום שלם בים – אתה לא מרגיש מותש. זה משנה את כל החוויה."</div>
+      <div class="lens-pill">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <span>סינון</span>
       </div>
-      <div class="tech-panel">
-        <h3>קיטוב מתקדם (Polarized)</h3>
-        <p>מבטל החזרים מסנוורים ממים, מאספלט, משלג וממשטחים מבריקים.</p>
-        <p>מי שגולש, רוכב או דג – יודע בדיוק על מה אנחנו מדברים. רואים את גוף המים, לא את ההשתקפות.</p>
-        <div class="feel">"לראשונה ראיתי את גלי הים מבעד לפני המים. תחושה של סופר־כוח."</div>
+      <div class="lens-pill">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M5 12h14M12 5v14"/>
+        </svg>
+        <span>קיטוב</span>
       </div>
-      <div class="tech-panel">
-        <h3>הבלטת צבעים</h3>
-        <p>הטכנולוגיה הייחודית של מאווי ג'ים: העדשות לא מחשיכות את העולם – הן <strong>מדגישות צבעים</strong>.</p>
-        <p>הים יותר טורקיז, השמיים יותר עמוקים, הירוק של היערות חי יותר. כאילו מישהו הגביר רוויה למציאות.</p>
-        <div class="feel">"פשוט צריך לנסות להסתובב איתם בחוץ כמה שניות ולהרגיש את ההבדל."</div>
+      <div class="lens-pill">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span>הבלטת צבעים</span>
       </div>
     </div>
   </div>
@@ -636,29 +654,47 @@
 <section id="audience">
   <div class="reveal">
     <div class="section-eyebrow">קהל היעד</div>
-    <h2 class="section-title">את מי אנחנו מחפשים <span class="accent">לפעילות השת"פ</span>?</h2>
-    <p class="section-intro">
-      קהל היעד של משקפי השמש הספורטיביים של מאווי ג'ים הוא גברים ונשים נאים וספורטיביים,
-      שההופעה שלהם חשובה להם, ובעיקר חשוב להם איכות הביגוד והציוד שהם משתמשים בו.
-    </p>
+    <h2 class="section-title">את מי אנחנו מחפשים <span class="accent">לפעילות השת"פ</span> איתנו?</h2>
   </div>
 
   <div class="audience-card reveal">
     <div class="audience-text">
-      <h3>אנחנו מחפשים אנשים ונשים בדיוק כאלה</h3>
+      <p style="color: var(--text); font-size: 1.05rem;">
+        קהל היעד של משקפי השמש הספורטיביים של מאווי ג'ים הוא גברים ונשים נאים וספורטיביים,
+        שההופעה שלהם חשובה להם, ובעיקר חשוב להם איכות הביגוד והציוד בו הם משתמשים.
+      </p>
+      <h3>אנחנו מחפשים אנשים ונשים בדיוק כאלה:</h3>
       <ul class="audience-list">
-        <li>בעלי הופעה נאה ופוטוגנית</li>
-        <li>ספורטיביים פעילים – גלישה, רכיבה, ריצה, ים</li>
-        <li>יודעים להעריך משקפי שמש איכותיים</li>
-        <li>אותנטיים – יש להם קהל אמיתי ברשתות</li>
+        <li>בעלי הופעה נאה, ספורטיביים שיודעים להעריך משקפי שמש איכותיים. פשוט.</li>
       </ul>
       <div class="audience-quote">
         <span class="heart">♥</span>
-        <strong>לא חשוב לנו</strong> מספר העוקבים או נוכחות גבוהה ברשתות.
-        חשובה לנו האותנטיות.
+        <strong>לא חשוב לנו</strong> מספר העוקבים או נוכחות גבוהה ברשתות. חשובה לנו האותנטיות.
       </div>
     </div>
-    <div class="audience-visual"></div>
+    <div class="audience-visual" aria-hidden="true">
+      <div class="horizon"></div>
+      <svg class="glasses-art" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lensG2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0d3a5c"/>
+            <stop offset="60%" stop-color="#060f1f"/>
+            <stop offset="100%" stop-color="#000"/>
+          </linearGradient>
+          <linearGradient id="frameG2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f0c878"/>
+            <stop offset="100%" stop-color="#a47e36"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="55" cy="40" rx="38" ry="28" fill="url(#lensG2)" stroke="url(#frameG2)" stroke-width="3"/>
+        <ellipse cx="145" cy="40" rx="38" ry="28" fill="url(#lensG2)" stroke="url(#frameG2)" stroke-width="3"/>
+        <path d="M93 32 Q100 26 107 32" stroke="url(#frameG2)" stroke-width="3" fill="none"/>
+        <path d="M17 38 L4 30" stroke="url(#frameG2)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M183 38 L196 30" stroke="url(#frameG2)" stroke-width="3" stroke-linecap="round"/>
+        <ellipse cx="42" cy="30" rx="10" ry="5" fill="rgba(255,200,120,0.4)"/>
+        <ellipse cx="132" cy="30" rx="10" ry="5" fill="rgba(255,200,120,0.4)"/>
+      </svg>
+    </div>
   </div>
 </section>
 
@@ -667,56 +703,41 @@
   <div class="reveal">
     <div class="section-eyebrow">תהליך העבודה</div>
     <h2 class="section-title">איך זה <span class="accent">מתבצע</span>?</h2>
-    <p class="section-intro">חמישה שלבים פשוטים מהרגע שאתם מאשרים – ועד שהתוכן עולה לאוויר.</p>
   </div>
 
   <div class="steps reveal">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-card">
-        <h3>בחירת דגם המשקפיים</h3>
-        <p>אתם בוחרים דגם מהקולקציה של מאווי ג'ים. מה שבא לכם – הדגם נשאר אצלכם במתנה.</p>
-        <span class="meta">אפשר לבחור באון־ליין או פיזית בסניפים</span>
+        <p>אתם בוחרים דגם מהקולקציה של מאווי ג'ים. מה שבא לכם. הדגם הזה נשאר אצלכם. במתנה. (אפשר לבחור באון־ליין או פיזית בסניפים).</p>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-card">
-        <h3>בריף קצר על הדגם</h3>
-        <p>מקבלים בריף קצר על הדגם ממנהלת הסושיאל שלנו (לא בטוחים שקיבלתם או הבנתם? פנו אלינו).
-          מאחר ומדובר על מותג איכותי מאוד – יש מה לספר על העדשות ועל המסגרות.</p>
-        <span class="meta">לכל סוג עדשות אצל מאווי ג'ים ייחוד משלו</span>
+        <p>מקבלים בריף קצר על הדגם ממנהלת הסושיאל שלנו (לא בטוחים שקיבלתם או הבנתם? פנו אלינו) מאחר ומדובר על מותג איכותי מאוד – יש מה לספר על העדשות ועל המסגרות (לכל סוג עדשות אצל מאווי ג'ים ייחוד משלו וכך גם המסגרות).</p>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-card">
-        <h3>צילום ריל בפעולה</h3>
-        <p>מצלמים סרטון ריל עם המשקפיים בלבוש ספורט + כמה מילים על איכות הדגם שבחרתם.
-          לא חייבים לומר כל מה שיש בבריף – תבחרו על מה לספר.</p>
-        <span class="meta">סטייל אותנטי שלכם · ללא תסריט מחייב</span>
+        <p>מצלמים סרטון ריל עם המשקפיים בלובש בבגדי ספורט + כמה מילים על איכות הדגם שבחרתם (לא חייבים לומר כל מה שיש בבריף, אפשר לבחור על מה לספר. מה שיושב לכם נכון...).</p>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-card">
-        <h3>שליחה לאישור</h3>
-        <p>שולחים לאורי, מנהלת הסושיאל שלנו, לוואטסאפ:
-          <a href="https://wa.me/972528767812" style="color:var(--gold-bright); text-decoration:none; font-weight:700;">052-8767812</a>
-          לפני העלאה לאישור.</p>
-        <span class="meta">תהליך מהיר · אישור תוך שעות בודדות</span>
+        <p>שולחים לאורי, מנהלת הסושיאל שלנו, <a class="phone" href="https://wa.me/972528767812">052-8767812</a>, לפני העלאה לאישור, ומעלים לרשתות שלכם.</p>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">5</div>
       <div class="step-card">
-        <h3>עולה לרשתות</h3>
-        <p>זהו. מכאן אנחנו ממשיכים – נקדם ונפרסם את הסרטונים במסגרת פעילויות המותג.</p>
-        <span class="meta">חשיפה רחבה במסגרת הקמפיין</span>
+        <p>זהו. מכאן אנחנו ממשיכים. נקדם ונפרסם את הסרטונים במסגרת פעילויות המותג.</p>
       </div>
     </div>
   </div>
@@ -769,19 +790,6 @@
 </footer>
 
 <script>
-  // Lens tech tabs
-  const tabs = document.querySelectorAll('.tech-tab');
-  const panels = document.querySelectorAll('.tech-panel');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const idx = +tab.dataset.tab;
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      panels[idx].classList.add('active');
-    });
-  });
-
   // Reveal on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -792,17 +800,6 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Auto-cycle tabs every 6s if user hasn't interacted
-  let userInteracted = false;
-  tabs.forEach(t => t.addEventListener('click', () => userInteracted = true));
-  let cycle = 0;
-  setInterval(() => {
-    if (userInteracted) return;
-    cycle = (cycle + 1) % tabs.length;
-    tabs[cycle].click();
-    userInteracted = false;
-  }, 6000);
 </script>
 
 </body>
