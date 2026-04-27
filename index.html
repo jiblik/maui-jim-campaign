@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>שת"פ Maui Jim · בריף לקריאייטורים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Assistant:wght@300;400;600;700&family=Italianno&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-900: #060f1f;
+    --navy-800: #0a1830;
+    --navy-700: #102246;
+    --navy-600: #18305d;
+    --gold: #d4a85a;
+    --gold-bright: #f0c878;
+    --gold-deep: #a47e36;
+    --cream: #f3e9d2;
+    --text: #e9eef7;
+    --text-dim: #a8b3c6;
+    --line: rgba(212, 168, 90, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Heebo', 'Assistant', sans-serif;
+    background: var(--navy-900);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    direction: rtl;
+  }
+
+  /* ===== Animated background ===== */
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(212, 168, 90, 0.15), transparent 50%),
+      radial-gradient(ellipse at 20% 100%, rgba(24, 48, 93, 0.6), transparent 50%),
+      linear-gradient(180deg, var(--navy-900), var(--navy-800) 40%, var(--navy-900));
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 80px 24px 40px;
+  }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(6, 15, 31, 0.55) 0%, rgba(6, 15, 31, 0.85) 70%, var(--navy-900) 100%),
+      url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=2400&q=80') center/cover;
+    transform: scale(1.05);
+    animation: kenburns 20s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.05) translateX(0); }
+    to { transform: scale(1.15) translateX(-2%); }
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 900px;
+    z-index: 2;
+    animation: fadeUp 1.2s ease-out;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    color: var(--gold-bright);
+    letter-spacing: 0.5em;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero-script {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    color: var(--gold-bright);
+    line-height: 1;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 24px rgba(212, 168, 90, 0.4);
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    margin: 16px 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .accent { color: var(--gold-bright); }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-dim);
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    color: var(--navy-900);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 999px;
+    font-size: 1rem;
+    box-shadow: 0 12px 40px rgba(212, 168, 90, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+  .hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px rgba(212, 168, 90, 0.5);
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 0.85rem;
+    opacity: 0.7;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== Sections ===== */
+  section {
+    padding: 100px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-eyebrow {
+    color: var(--gold-bright);
+    letter-spacing: 0.4em;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .section-title .accent { color: var(--gold-bright); }
+  .section-intro {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin-bottom: 50px;
+  }
+
+  /* ===== About brand cards ===== */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+  .brand-card {
+    background: linear-gradient(160deg, rgba(24, 48, 93, 0.4), rgba(10, 24, 48, 0.6));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .brand-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+  }
+  .brand-card .num {
+    font-family: 'Italianno', cursive;
+    font-size: 2.5rem;
+    color: var(--gold-bright);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .brand-card p { color: var(--text); font-size: 0.98rem; }
+
+  /* ===== Lens tech (interactive tabs) ===== */
+  .tech-wrap {
+    background: linear-gradient(160deg, rgba(24, 48, 93, 0.5), rgba(10, 24, 48, 0.7));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+  .tech-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tech-tab {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: var(--text);
+    text-align: right;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.3s ease;
+  }
+  .tech-tab:hover { border-color: var(--gold); }
+  .tech-tab.active {
+    background: linear-gradient(135deg, rgba(212, 168, 90, 0.15), transparent);
+    border-color: var(--gold);
+    color: var(--gold-bright);
+  }
+  .tech-tab .icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 168, 90, 0.1);
+    border-radius: 10px;
+    color: var(--gold-bright);
+    flex-shrink: 0;
+  }
+  .tech-content {
+    position: relative;
+    min-height: 280px;
+  }
+  .tech-panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+  }
+  .tech-panel.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .tech-panel h3 {
+    font-size: 1.8rem;
+    color: var(--gold-bright);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .tech-panel p {
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .tech-panel .feel {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(212, 168, 90, 0.08);
+    border-right: 3px solid var(--gold);
+    border-radius: 8px;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  /* ===== Audience ===== */
+  .audience-card {
+    background: linear-gradient(160deg, rgba(24, 48, 93, 0.4), rgba(10, 24, 48, 0.6));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .audience-text h3 {
+    font-size: 1.5rem;
+    color: var(--gold-bright);
+    margin-bottom: 16px;
+  }
+  .audience-list { list-style: none; margin-top: 20px; }
+  .audience-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 1.02rem;
+  }
+  .audience-list li::before {
+    content: "✓";
+    color: var(--gold-bright);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .audience-quote {
+    background: rgba(212, 168, 90, 0.08);
+    border-right: 3px solid var(--gold);
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin-top: 24px;
+    color: var(--cream);
+    font-size: 0.98rem;
+  }
+  .audience-quote .heart { color: var(--gold-bright); margin-left: 8px; }
+  .audience-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(212, 168, 90, 0.2), rgba(24, 48, 93, 0.6));
+  }
+  .audience-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 50%, rgba(6, 15, 31, 0.9) 100%),
+      url('https://images.unsplash.com/photo-1545153996-433d6885ec73?auto=format&fit=crop&w=1200&q=80') center/cover;
+  }
+
+  /* ===== Process steps ===== */
+  .steps {
+    position: relative;
+    counter-reset: step;
+  }
+  .steps::before {
+    content: "";
+    position: absolute;
+    right: 40px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep), transparent);
+    opacity: 0.5;
+  }
+  .step {
+    position: relative;
+    padding: 24px 0 24px 0;
+    padding-right: 110px;
+    cursor: pointer;
+  }
+  .step-num {
+    position: absolute;
+    right: 0;
+    top: 24px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    color: var(--navy-900);
+    font-size: 2rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(212, 168, 90, 0.3);
+    transition: transform 0.4s ease;
+    z-index: 2;
+  }
+  .step:hover .step-num { transform: scale(1.08) rotate(-5deg); }
+  .step-card {
+    background: linear-gradient(160deg, rgba(24, 48, 93, 0.4), rgba(10, 24, 48, 0.6));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 28px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .step:hover .step-card {
+    border-color: var(--gold);
+    transform: translateX(-6px);
+  }
+  .step-card h3 {
+    font-size: 1.3rem;
+    color: var(--gold-bright);
+    margin-bottom: 8px;
+  }
+  .step-card p { color: var(--text); }
+  .step-card .meta {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    padding: 4px 12px;
+    background: rgba(212, 168, 90, 0.08);
+    border-radius: 999px;
+  }
+
+  /* ===== Features strip ===== */
+  .features {
+    margin-top: 80px;
+    background: linear-gradient(160deg, rgba(24, 48, 93, 0.4), rgba(10, 24, 48, 0.6));
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+  }
+  .feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .feature .icon {
+    width: 48px;
+    height: 48px;
+    color: var(--gold-bright);
+  }
+  .feature span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ===== CTA final ===== */
+  .cta-final {
+    text-align: center;
+    padding: 80px 24px;
+    background: linear-gradient(180deg, transparent, rgba(212, 168, 90, 0.05));
+  }
+  .cta-final h2 {
+    font-family: 'Italianno', cursive;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: var(--gold-bright);
+    margin-bottom: 16px;
+  }
+  .cta-final p {
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    max-width: 540px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--gold-bright);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .btn-secondary:hover {
+    background: rgba(212, 168, 90, 0.1);
+    transform: translateY(-2px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ===== Reveal animation ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 820px) {
+    .tech-wrap { grid-template-columns: 1fr; padding: 24px; }
+    .tech-content { min-height: auto; }
+    .tech-panel { position: static; }
+    .tech-panel:not(.active) { display: none; }
+    .audience-card { grid-template-columns: 1fr; padding: 24px; }
+    .audience-visual { aspect-ratio: 16/10; }
+    .steps::before { right: 24px; }
+    .step { padding-right: 80px; }
+    .step-num { width: 56px; height: 56px; font-size: 1.4rem; top: 28px; }
+    section { padding: 70px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">שיתוף פעולה ממומן</div>
+    <div class="hero-script">Maui Jim</div>
+    <h1>שת"פ <span class="accent">מאווי ג'ים</span></h1>
+    <p class="hero-sub">
+      קמפיין דיגיטלי לסלבים ומשפיענים ספורטיביים בישראל –
+      משקפי שמש איכותיים שגולשים, רוכבים וספורטאים מובילים בעולם נשבעים בהם.
+    </p>
+    <button class="hero-cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+      גלו את הקמפיין
+      <span style="font-size:1.2rem">↓</span>
+    </button>
+  </div>
+  <div class="scroll-hint">גללו למטה</div>
+</header>
+
+<!-- ===== ABOUT BRAND ===== -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-eyebrow">על המותג</div>
+    <h2 class="section-title">קצת על משקפי השמש <span class="accent">של מאווי ג'ים</span></h2>
+    <p class="section-intro">
+      Maui Jim נחשב לאחד המותגים האיכותיים ביותר בעולם משקפי השמש הספורטיביים –
+      "מותג של מביני דבר" שעדיין לא מוכר מספיק בישראל. כאן נכנסים אתם.
+    </p>
+  </div>
+
+  <div class="brand-grid reveal">
+    <div class="brand-card">
+      <div class="num">01</div>
+      <p>מותג <strong>פרימיום עולמי</strong> בעולם משקפי השמש הספורטיביים – איכות בלתי מתפשרת.</p>
+    </div>
+    <div class="brand-card">
+      <div class="num">02</div>
+      <p>נחשב ל"מותג של <strong>מביני דבר</strong>" – פחות מוכר בישראל, אבל ידוע מאוד בעולם.</p>
+    </div>
+    <div class="brand-card">
+      <div class="num">03</div>
+      <p>הכי פופולרי בארה"ב בקרב <strong>קהילות הגולשים וחובבי הספורט הימי</strong>.</p>
+    </div>
+    <div class="brand-card">
+      <div class="num">04</div>
+      <p>נחשב למשקפי שמש ספורטיביים עמידים – אבל היתרון <strong>האמיתי הוא בעדשות</strong>.</p>
+    </div>
+  </div>
+
+  <!-- ===== LENS TECH INTERACTIVE ===== -->
+  <div class="reveal">
+    <div class="section-eyebrow" style="margin-top: 40px;">טכנולוגיית העדשות</div>
+    <h2 class="section-title">היתרון האמיתי – <span class="accent">בעדשות</span></h2>
+    <p class="section-intro">לחצו על כל יכולת כדי להבין למה מי שמרכיב פעם – לא חוזר אחורה.</p>
+  </div>
+
+  <div class="tech-wrap reveal">
+    <div class="tech-tabs">
+      <button class="tech-tab active" data-tab="0">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg>
+        </span>
+        הגנה
+      </button>
+      <button class="tech-tab" data-tab="1">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </span>
+        סינון
+      </button>
+      <button class="tech-tab" data-tab="2">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5v14"/><circle cx="12" cy="12" r="9"/></svg>
+        </span>
+        קיטוב
+      </button>
+      <button class="tech-tab" data-tab="3">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/></svg>
+        </span>
+        הבלטת צבעים
+      </button>
+    </div>
+
+    <div class="tech-content">
+      <div class="tech-panel active">
+        <h3>הגנה מקסימלית מהשמש</h3>
+        <p>חסימה מלאה של קרני UVA/UVB מסוכנות, כולל הגנה מפני זוהר ים ומדבר.</p>
+        <p>העדשות בנויות משכבות מרובות שמסננות את הספקטרום שמזיק לעיניים – ולא רק "מחשיכות" כמו רוב המשקפיים.</p>
+        <div class="feel">"זה לא משקפי שמש – זו שכבת הגנה. ההבדל מורגש אחרי דקה בחוץ."</div>
+      </div>
+      <div class="tech-panel">
+        <h3>סינון אור חכם</h3>
+        <p>מסננים את אורכי הגל המעייפים את העין – ומשאירים רק את האור שמועיל לראייה.</p>
+        <p>התוצאה: שעות ארוכות בחוץ בלי כאב ראש, בלי דמעות, בלי עיניים אדומות.</p>
+        <div class="feel">"אחרי יום שלם בים – אתה לא מרגיש מותש. זה משנה את כל החוויה."</div>
+      </div>
+      <div class="tech-panel">
+        <h3>קיטוב מתקדם (Polarized)</h3>
+        <p>מבטל החזרים מסנוורים ממים, מאספלט, משלג וממשטחים מבריקים.</p>
+        <p>מי שגולש, רוכב או דג – יודע בדיוק על מה אנחנו מדברים. רואים את גוף המים, לא את ההשתקפות.</p>
+        <div class="feel">"לראשונה ראיתי את גלי הים מבעד לפני המים. תחושה של סופר־כוח."</div>
+      </div>
+      <div class="tech-panel">
+        <h3>הבלטת צבעים</h3>
+        <p>הטכנולוגיה הייחודית של מאווי ג'ים: העדשות לא מחשיכות את העולם – הן <strong>מדגישות צבעים</strong>.</p>
+        <p>הים יותר טורקיז, השמיים יותר עמוקים, הירוק של היערות חי יותר. כאילו מישהו הגביר רוויה למציאות.</p>
+        <div class="feel">"פשוט צריך לנסות להסתובב איתם בחוץ כמה שניות ולהרגיש את ההבדל."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AUDIENCE ===== -->
+<section id="audience">
+  <div class="reveal">
+    <div class="section-eyebrow">קהל היעד</div>
+    <h2 class="section-title">את מי אנחנו מחפשים <span class="accent">לפעילות השת"פ</span>?</h2>
+    <p class="section-intro">
+      קהל היעד של משקפי השמש הספורטיביים של מאווי ג'ים הוא גברים ונשים נאים וספורטיביים,
+      שההופעה שלהם חשובה להם, ובעיקר חשוב להם איכות הביגוד והציוד שהם משתמשים בו.
+    </p>
+  </div>
+
+  <div class="audience-card reveal">
+    <div class="audience-text">
+      <h3>אנחנו מחפשים אנשים ונשים בדיוק כאלה</h3>
+      <ul class="audience-list">
+        <li>בעלי הופעה נאה ופוטוגנית</li>
+        <li>ספורטיביים פעילים – גלישה, רכיבה, ריצה, ים</li>
+        <li>יודעים להעריך משקפי שמש איכותיים</li>
+        <li>אותנטיים – יש להם קהל אמיתי ברשתות</li>
+      </ul>
+      <div class="audience-quote">
+        <span class="heart">♥</span>
+        <strong>לא חשוב לנו</strong> מספר העוקבים או נוכחות גבוהה ברשתות.
+        חשובה לנו האותנטיות.
+      </div>
+    </div>
+    <div class="audience-visual"></div>
+  </div>
+</section>
+
+<!-- ===== PROCESS STEPS ===== -->
+<section id="process">
+  <div class="reveal">
+    <div class="section-eyebrow">תהליך העבודה</div>
+    <h2 class="section-title">איך זה <span class="accent">מתבצע</span>?</h2>
+    <p class="section-intro">חמישה שלבים פשוטים מהרגע שאתם מאשרים – ועד שהתוכן עולה לאוויר.</p>
+  </div>
+
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-card">
+        <h3>בחירת דגם המשקפיים</h3>
+        <p>אתם בוחרים דגם מהקולקציה של מאווי ג'ים. מה שבא לכם – הדגם נשאר אצלכם במתנה.</p>
+        <span class="meta">אפשר לבחור באון־ליין או פיזית בסניפים</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-card">
+        <h3>בריף קצר על הדגם</h3>
+        <p>מקבלים בריף קצר על הדגם ממנהלת הסושיאל שלנו (לא בטוחים שקיבלתם או הבנתם? פנו אלינו).
+          מאחר ומדובר על מותג איכותי מאוד – יש מה לספר על העדשות ועל המסגרות.</p>
+        <span class="meta">לכל סוג עדשות אצל מאווי ג'ים ייחוד משלו</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-card">
+        <h3>צילום ריל בפעולה</h3>
+        <p>מצלמים סרטון ריל עם המשקפיים בלבוש ספורט + כמה מילים על איכות הדגם שבחרתם.
+          לא חייבים לומר כל מה שיש בבריף – תבחרו על מה לספר.</p>
+        <span class="meta">סטייל אותנטי שלכם · ללא תסריט מחייב</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-card">
+        <h3>שליחה לאישור</h3>
+        <p>שולחים לאורי, מנהלת הסושיאל שלנו, לוואטסאפ:
+          <a href="https://wa.me/972528767812" style="color:var(--gold-bright); text-decoration:none; font-weight:700;">052-8767812</a>
+          לפני העלאה לאישור.</p>
+        <span class="meta">תהליך מהיר · אישור תוך שעות בודדות</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-card">
+        <h3>עולה לרשתות</h3>
+        <p>זהו. מכאן אנחנו ממשיכים – נקדם ונפרסם את הסרטונים במסגרת פעילויות המותג.</p>
+        <span class="meta">חשיפה רחבה במסגרת הקמפיין</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features strip -->
+  <div class="features reveal">
+    <div class="feature">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M2 12c2-3 6-5 10-5s8 2 10 5c-2 3-6 5-10 5S4 15 2 12z"/>
+        <circle cx="12" cy="12" r="2.5"/>
+      </svg>
+      <span>עיצוב יוקרתי בסטייל</span>
+    </div>
+    <div class="feature">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 21c0-7 5-13 14-15-1 8-6 13-14 15z"/>
+      </svg>
+      <span>קלות ונוחות לשימוש יומיומי</span>
+    </div>
+    <div class="feature">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2c-3 4-5 7-5 11a5 5 0 0010 0c0-4-2-7-5-11z"/>
+      </svg>
+      <span>עמידות גבוהה לתנאי שטח</span>
+    </div>
+    <div class="feature">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2v6M9 8h6M7 22V11h10v11M3 22h18"/>
+      </svg>
+      <span>מותג אייקוני בהשראת הוואי</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="cta-final reveal">
+  <h2>מוכנים להצטרף?</h2>
+  <p>שאלות, אישורים או רוצים להתחיל? אורי, מנהלת הסושיאל שלנו, זמינה לכם בוואטסאפ.</p>
+  <div class="cta-buttons">
+    <a href="https://wa.me/972528767812" class="hero-cta">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4l-2.5-1.2c-.3-.1-.7-.1-1 .2l-1 1.2c-1.6-.8-2.9-2.1-3.7-3.7l1.2-1c.3-.3.4-.6.2-1l-1.2-2.5c-.2-.4-.6-.6-1-.4-2 .8-3 3-2.2 5C7.6 14.4 9.6 16.4 12 17.4c2 .8 4.2-.2 5-2.2.2-.4 0-.8-.4-1z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.7.4 3.3 1.2 4.7L2 22l5.3-1.2c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3.1.7.7-3.1-.2-.3C4.4 14.9 4 13.5 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8z"/></svg>
+      וואטסאפ – 052-8767812
+    </a>
+    <a href="#about" class="btn-secondary">חזרה למעלה ↑</a>
+  </div>
+</section>
+
+<footer>
+  © Maui Jim Israel · שת"פ קריאייטורים
+</footer>
+
+<script>
+  // Lens tech tabs
+  const tabs = document.querySelectorAll('.tech-tab');
+  const panels = document.querySelectorAll('.tech-panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const idx = +tab.dataset.tab;
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      panels[idx].classList.add('active');
+    });
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Auto-cycle tabs every 6s if user hasn't interacted
+  let userInteracted = false;
+  tabs.forEach(t => t.addEventListener('click', () => userInteracted = true));
+  let cycle = 0;
+  setInterval(() => {
+    if (userInteracted) return;
+    cycle = (cycle + 1) % tabs.length;
+    tabs[cycle].click();
+    userInteracted = false;
+  }, 6000);
+</script>
+
+</body>
+</html>
