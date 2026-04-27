@@ -96,13 +96,12 @@
     margin-bottom: 24px;
     text-transform: uppercase;
   }
-  .hero-script {
-    font-family: 'Italianno', cursive;
-    font-size: clamp(3.5rem, 8vw, 6rem);
-    color: var(--gold-bright);
-    line-height: 1;
-    margin-bottom: 8px;
-    text-shadow: 0 4px 24px rgba(212, 168, 90, 0.4);
+  .hero-logo {
+    display: block;
+    margin: 0 auto 16px;
+    width: clamp(220px, 32vw, 360px);
+    height: auto;
+    filter: drop-shadow(0 4px 24px rgba(212, 168, 90, 0.5));
   }
   .hero h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -539,7 +538,7 @@
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">שיתוף פעולה ממומן</div>
-    <div class="hero-script">Maui Jim</div>
+    <img class="hero-logo" src="images/maui-jim-logo.svg" alt="Maui Jim">
     <h1>שת"פ <span class="accent">מאווי ג'ים</span></h1>
     <button class="hero-cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
       קראו את הבריף
