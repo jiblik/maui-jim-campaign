@@ -59,21 +59,10 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(180deg, rgba(6, 15, 31, 0.55) 0%, rgba(6, 15, 31, 0.85) 70%, var(--navy-900) 100%),
-      linear-gradient(135deg, #0a2540 0%, #0d3a5c 40%, #1a5a82 70%, #2a7ba8 100%);
+      linear-gradient(180deg, rgba(6, 15, 31, 0.45) 0%, rgba(6, 15, 31, 0.75) 75%, var(--navy-900) 100%),
+      url('images/hero.jpg') center 30% / cover no-repeat;
     transform: scale(1.05);
     animation: kenburns 20s ease-in-out infinite alternate;
-  }
-  /* Decorative palm/sun layers */
-  .hero-bg::before {
-    content: "";
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 60%;
-    height: 80%;
-    background: radial-gradient(circle at 30% 40%, rgba(240, 200, 120, 0.35), transparent 55%);
-    filter: blur(20px);
   }
   .hero-bg::after {
     content: "";
@@ -81,7 +70,7 @@
     bottom: 0;
     right: 0;
     width: 100%;
-    height: 50%;
+    height: 30%;
     background: linear-gradient(180deg, transparent, rgba(6, 15, 31, 0.9));
   }
   @keyframes kenburns {
@@ -159,12 +148,39 @@
     50% { transform: translateX(-50%) translateY(8px); }
   }
 
-  /* Sunglasses SVG decoration */
-  .hero-glasses {
-    margin: 30px auto 0;
-    width: clamp(120px, 18vw, 180px);
-    opacity: 0.85;
-    filter: drop-shadow(0 8px 24px rgba(212, 168, 90, 0.35));
+  /* ===== Lifestyle gallery ===== */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 50px 0;
+  }
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    transition: transform 0.4s ease, border-color 0.3s ease;
+  }
+  .gallery-item:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(6, 15, 31, 0.5));
+    pointer-events: none;
   }
 
   /* ===== Sections ===== */
@@ -322,53 +338,25 @@
   }
   .audience-quote .heart { color: var(--gold-bright); margin-left: 8px; font-size: 1.1rem; }
 
-  /* Self-contained audience visual (CSS art) */
   .audience-visual {
     position: relative;
     aspect-ratio: 4/5;
     border-radius: 16px;
     overflow: hidden;
-    background:
-      radial-gradient(ellipse at 30% 30%, rgba(240, 200, 120, 0.35), transparent 50%),
-      linear-gradient(135deg, #0d3a5c 0%, #1a5a82 50%, #2a7ba8 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 1px solid var(--line);
   }
-  .audience-visual::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%;
-    height: 50%;
-    background: radial-gradient(circle at 70% 30%, rgba(255, 220, 150, 0.4), transparent 60%);
-    filter: blur(20px);
+  .audience-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .audience-visual::after {
     content: "";
     position: absolute;
-    bottom: -10%;
-    left: -10%;
-    width: 120%;
-    height: 50%;
-    background: linear-gradient(180deg, transparent, rgba(6, 15, 31, 0.8));
-  }
-  .audience-visual .glasses-art {
-    position: relative;
-    z-index: 2;
-    width: 70%;
-    max-width: 280px;
-    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.5));
-  }
-  .audience-visual .horizon {
-    position: absolute;
-    bottom: 30%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(240, 200, 120, 0.6), transparent);
-    z-index: 1;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(6, 15, 31, 0.4));
+    pointer-events: none;
   }
 
   /* ===== Process steps ===== */
@@ -529,8 +517,10 @@
   /* ===== Mobile ===== */
   @media (max-width: 820px) {
     .audience-card { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
-    .audience-visual { aspect-ratio: 16/10; }
+    .audience-visual { aspect-ratio: 4/3; }
     .lens-icons { grid-template-columns: repeat(2, 1fr); }
+    .gallery { grid-template-columns: 1fr; gap: 12px; margin: 30px 0; }
+    .gallery-item { aspect-ratio: 16/10; }
     .steps::before { right: 24px; }
     .step { padding-right: 80px; }
     .step-num { width: 56px; height: 56px; font-size: 1.4rem; top: 28px; }
@@ -551,38 +541,10 @@
     <div class="hero-eyebrow">שיתוף פעולה ממומן</div>
     <div class="hero-script">Maui Jim</div>
     <h1>שת"פ <span class="accent">מאווי ג'ים</span></h1>
-    <!-- Sunglasses SVG -->
-    <svg class="hero-glasses" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="lensG" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#1a5a82"/>
-          <stop offset="60%" stop-color="#0d3a5c"/>
-          <stop offset="100%" stop-color="#060f1f"/>
-        </linearGradient>
-        <linearGradient id="frameG" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#f0c878"/>
-          <stop offset="100%" stop-color="#a47e36"/>
-        </linearGradient>
-      </defs>
-      <!-- Left lens -->
-      <ellipse cx="55" cy="40" rx="38" ry="28" fill="url(#lensG)" stroke="url(#frameG)" stroke-width="3"/>
-      <!-- Right lens -->
-      <ellipse cx="145" cy="40" rx="38" ry="28" fill="url(#lensG)" stroke="url(#frameG)" stroke-width="3"/>
-      <!-- Bridge -->
-      <path d="M93 32 Q100 26 107 32" stroke="url(#frameG)" stroke-width="3" fill="none"/>
-      <!-- Arms -->
-      <path d="M17 38 L4 30" stroke="url(#frameG)" stroke-width="3" stroke-linecap="round"/>
-      <path d="M183 38 L196 30" stroke="url(#frameG)" stroke-width="3" stroke-linecap="round"/>
-      <!-- Reflections -->
-      <ellipse cx="42" cy="30" rx="10" ry="5" fill="rgba(255,255,255,0.25)"/>
-      <ellipse cx="132" cy="30" rx="10" ry="5" fill="rgba(255,255,255,0.25)"/>
-    </svg>
-    <div>
-      <button class="hero-cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-        קראו את הבריף
-        <span style="font-size:1.2rem">↓</span>
-      </button>
-    </div>
+    <button class="hero-cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+      קראו את הבריף
+      <span style="font-size:1.2rem">↓</span>
+    </button>
   </div>
   <div class="scroll-hint">גללו למטה</div>
 </header>
@@ -611,6 +573,13 @@
       <div class="num">04</div>
       <p>משקפי מאווי ג'ים נחשבים למשקפי שמש ספורטיביים עמידים מאוד אך מעוצבים ואופנתיים, אבל עיקר היתרונות נמצא בעדשות של מאווי ג'ים:</p>
     </div>
+  </div>
+
+  <!-- Lifestyle gallery -->
+  <div class="gallery reveal">
+    <div class="gallery-item"><img src="images/boat.png" alt="חובב ספורט ימי עם משקפי מאווי ג'ים" loading="lazy"></div>
+    <div class="gallery-item"><img src="images/whiteshirt.png" alt="גבר אופנתי עם משקפי מאווי ג'ים" loading="lazy"></div>
+    <div class="gallery-item"><img src="images/runner.png" alt="ספורטאית עם משקפי מאווי ג'ים" loading="lazy"></div>
   </div>
 
   <!-- Lens summary -->
@@ -672,28 +641,8 @@
         <strong>לא חשוב לנו</strong> מספר העוקבים או נוכחות גבוהה ברשתות. חשובה לנו האותנטיות.
       </div>
     </div>
-    <div class="audience-visual" aria-hidden="true">
-      <div class="horizon"></div>
-      <svg class="glasses-art" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="lensG2" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#0d3a5c"/>
-            <stop offset="60%" stop-color="#060f1f"/>
-            <stop offset="100%" stop-color="#000"/>
-          </linearGradient>
-          <linearGradient id="frameG2" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#f0c878"/>
-            <stop offset="100%" stop-color="#a47e36"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="55" cy="40" rx="38" ry="28" fill="url(#lensG2)" stroke="url(#frameG2)" stroke-width="3"/>
-        <ellipse cx="145" cy="40" rx="38" ry="28" fill="url(#lensG2)" stroke="url(#frameG2)" stroke-width="3"/>
-        <path d="M93 32 Q100 26 107 32" stroke="url(#frameG2)" stroke-width="3" fill="none"/>
-        <path d="M17 38 L4 30" stroke="url(#frameG2)" stroke-width="3" stroke-linecap="round"/>
-        <path d="M183 38 L196 30" stroke="url(#frameG2)" stroke-width="3" stroke-linecap="round"/>
-        <ellipse cx="42" cy="30" rx="10" ry="5" fill="rgba(255,200,120,0.4)"/>
-        <ellipse cx="132" cy="30" rx="10" ry="5" fill="rgba(255,200,120,0.4)"/>
-      </svg>
+    <div class="audience-visual">
+      <img src="images/couple.png" alt="זוג עם משקפי שמש מאווי ג'ים" loading="lazy">
     </div>
   </div>
 </section>
@@ -786,7 +735,7 @@
 </section>
 
 <footer>
-  © Maui Jim Israel · שת"פ קריאייטורים
+  אופסטיטור · שת"פ קריאייטורים Maui Jim
 </footer>
 
 <script>
