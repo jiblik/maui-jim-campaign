@@ -421,6 +421,78 @@
   }
   .step-card .phone:hover { color: var(--cream); }
 
+  /* Pronunciation player */
+  .pronounce {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
+    padding: 14px 20px 14px 16px;
+    background: linear-gradient(135deg, rgba(212, 168, 90, 0.12), rgba(212, 168, 90, 0.04));
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    color: var(--gold-bright);
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+  .pronounce:hover {
+    background: rgba(212, 168, 90, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 168, 90, 0.25);
+  }
+  .pronounce .play-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    color: var(--navy-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+  .pronounce:hover .play-circle { transform: scale(1.08); }
+  .pronounce.playing .play-circle {
+    background: linear-gradient(135deg, var(--cream), var(--gold-bright));
+  }
+  .pronounce .label-main { display: block; line-height: 1.2; }
+  .pronounce .label-sub {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .pronounce .wave {
+    display: inline-flex;
+    gap: 3px;
+    margin-right: 6px;
+    height: 16px;
+    align-items: center;
+  }
+  .pronounce .wave span {
+    display: block;
+    width: 3px;
+    background: var(--gold-bright);
+    border-radius: 2px;
+    height: 6px;
+    transition: height 0.2s ease;
+  }
+  .pronounce.playing .wave span {
+    animation: wave 0.9s ease-in-out infinite;
+  }
+  .pronounce.playing .wave span:nth-child(2) { animation-delay: 0.15s; }
+  .pronounce.playing .wave span:nth-child(3) { animation-delay: 0.3s; }
+  .pronounce.playing .wave span:nth-child(4) { animation-delay: 0.45s; }
+  @keyframes wave {
+    0%, 100% { height: 6px; }
+    50% { height: 16px; }
+  }
+
   /* ===== Features strip ===== */
   .features {
     margin-top: 80px;
@@ -675,6 +747,19 @@
         <p>מצלמים סרטון ריל לאורך בלוק ספורטיבי, עם המשקפיים שבחרתם + כמה מילים קצרות על המותג, הדגם והחוויה שלכם ממנו.</p>
         <p style="margin-top:14px;">חשוב לדבר על תכונות מרכזיות של המשקפיים, כמו הנוחות, איכות העדשות, הראייה, הסטייל, המשקל הקל או כל יתרון שהרגיש לכם משמעותי.</p>
         <p style="margin-top:14px;">חשוב לבטא נכון את השם <strong>Maui Jim</strong> ולציין שניתן להשיג את הדגמים ברשת <strong>אופטיסטור</strong>.</p>
+        <button class="pronounce" type="button" id="pronounceBtn" aria-label="האזינו להגייה הנכונה של Maui Jim">
+          <span class="play-circle" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span>
+            <span class="label-main">לחצו לשמיעת ההגייה הנכונה</span>
+            <span class="label-sub">"מאוּאי ג'ים" · Maui Jim</span>
+          </span>
+          <span class="wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+        </button>
+        <audio id="pronounceAudio" preload="metadata" src="audio/maui-jim-pronunciation.ogg"></audio>
       </div>
     </div>
 
@@ -741,6 +826,31 @@
 </footer>
 
 <script>
+  // Pronunciation audio
+  const pBtn = document.getElementById('pronounceBtn');
+  const pAudio = document.getElementById('pronounceAudio');
+  const pIcon = pBtn ? pBtn.querySelector('.play-circle svg path') : null;
+  const playPath = "M8 5v14l11-7z";
+  const pausePath = "M6 5h4v14H6zM14 5h4v14h-4z";
+  if (pBtn && pAudio) {
+    pBtn.addEventListener('click', () => {
+      if (pAudio.paused) { pAudio.currentTime = 0; pAudio.play(); }
+      else { pAudio.pause(); }
+    });
+    pAudio.addEventListener('play', () => {
+      pBtn.classList.add('playing');
+      if (pIcon) pIcon.setAttribute('d', pausePath);
+    });
+    pAudio.addEventListener('pause', () => {
+      pBtn.classList.remove('playing');
+      if (pIcon) pIcon.setAttribute('d', playPath);
+    });
+    pAudio.addEventListener('ended', () => {
+      pBtn.classList.remove('playing');
+      if (pIcon) pIcon.setAttribute('d', playPath);
+    });
+  }
+
   // Reveal on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
