@@ -423,21 +423,24 @@
 
   /* Pronunciation player */
   .pronounce {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 14px;
-    margin-top: 18px;
-    padding: 14px 20px 14px 16px;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 16px 22px;
+    width: 100%;
     background: linear-gradient(135deg, rgba(212, 168, 90, 0.12), rgba(212, 168, 90, 0.04));
     border: 1px solid var(--gold);
-    border-radius: 999px;
+    border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
     color: var(--gold-bright);
     font-weight: 600;
-    font-size: 0.98rem;
+    font-size: 1rem;
+    text-align: right;
   }
+  .pronounce > span:nth-child(2) { flex: 1; }
   .pronounce:hover {
     background: rgba(212, 168, 90, 0.18);
     transform: translateY(-2px);
@@ -469,10 +472,13 @@
   }
   .pronounce .wave {
     display: inline-flex;
-    gap: 3px;
-    margin-right: 6px;
-    height: 16px;
+    gap: 4px;
+    height: 22px;
     align-items: center;
+    flex-shrink: 0;
+  }
+  .pronounce .wave span {
+    width: 4px;
   }
   .pronounce .wave span {
     display: block;
