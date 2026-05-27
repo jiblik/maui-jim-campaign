@@ -531,8 +531,10 @@
   /* ===== Video examples ===== */
   .videos {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 820px;
+    margin: 0 auto;
   }
   .video-card {
     position: relative;
@@ -878,6 +880,10 @@
     <div class="video-card">
       <span class="badge">דוגמה 3</span>
       <video src="videos/reel3.mp4" controls preload="metadata" playsinline></video>
+    </div>
+    <div class="video-card">
+      <span class="badge">דוגמה 4</span>
+      <video src="videos/reel4-adi.mp4" controls preload="metadata" playsinline></video>
     </div>
   </div>
 </section>
