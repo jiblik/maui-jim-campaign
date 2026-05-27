@@ -528,6 +528,48 @@
     color: var(--text);
   }
 
+  /* ===== Video examples ===== */
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .video-card {
+    position: relative;
+    aspect-ratio: 9/16;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #000;
+    transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .video-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .video-card .badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(6, 15, 31, 0.7);
+    backdrop-filter: blur(10px);
+    color: var(--gold-bright);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    pointer-events: none;
+    z-index: 2;
+  }
+
   /* ===== Final CTA ===== */
   .cta-final {
     text-align: center;
@@ -599,6 +641,8 @@
     .lens-icons { grid-template-columns: repeat(2, 1fr); }
     .gallery { grid-template-columns: 1fr; gap: 12px; margin: 30px 0; }
     .gallery-item { aspect-ratio: 16/10; }
+    .videos { grid-template-columns: 1fr; gap: 16px; }
+    .video-card { max-width: 360px; margin: 0 auto; width: 100%; }
     .steps::before { right: 24px; }
     .step { padding-right: 80px; }
     .step-num { width: 56px; height: 56px; font-size: 1.4rem; top: 28px; }
@@ -810,6 +854,30 @@
         <path d="M12 2v6M9 8h6M7 22V11h10v11M3 22h18"/>
       </svg>
       <span>מותג אייקוני בהשראת הוואי</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO EXAMPLES ===== -->
+<section id="examples">
+  <div class="reveal">
+    <div class="section-eyebrow">השראה</div>
+    <h2 class="section-title">דוגמאות <span class="accent">לסרטוני ריל</span></h2>
+    <p class="section-intro">כך זה יכול להיראות – שלוש דוגמאות לסרטונים של קריאייטורים עם משקפי מאווי ג'ים. תרגישו חופשי לקחת השראה.</p>
+  </div>
+
+  <div class="videos reveal">
+    <div class="video-card">
+      <span class="badge">דוגמה 1</span>
+      <video src="videos/reel1-optistore.mp4" controls preload="metadata" playsinline></video>
+    </div>
+    <div class="video-card">
+      <span class="badge">דוגמה 2</span>
+      <video src="videos/reel2.mp4" controls preload="metadata" playsinline></video>
+    </div>
+    <div class="video-card">
+      <span class="badge">דוגמה 3</span>
+      <video src="videos/reel3.mp4" controls preload="metadata" playsinline></video>
     </div>
   </div>
 </section>
